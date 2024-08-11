@@ -3,6 +3,8 @@ kind: ApplicationSet
 metadata:
   name: prod-eu-appset
   namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.slack: slack-testing  #Slack Channel name
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
@@ -25,7 +27,7 @@ spec:
         targetRevision: HEAD
         path: '{{.path.path}}'
         helm:
-          releaseName: '{{index .path.segments 1}}'
+          releaseName: '{{index .path.segments 1}}'  # This will decide the name of the release using application folder name
       # Destination cluster and namespace to deploy the application
       destination:
         server: https://kubernetes.default.svc
