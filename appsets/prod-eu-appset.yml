@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: prod-appset
+  name: prod-eu-appset
   namespace: argocd
 spec:
   goTemplate: true
@@ -11,14 +11,15 @@ spec:
       repoURL: https://github.com/debianmaster/argocd-demo.git
       revision: HEAD
       directories:
-      - path: apps/*/envs/prod-us
       - path: apps/*/envs/prod-eu      
+      values:
+        cluster: '{{.branch}}-{{.path.basename}}'
   template:      
     metadata:
       name: '{{index .path.segments 1}}-{{index .path.segments 3}}' 
     spec:
       # The project the application belongs to.
-      project: default
+      project: prod-eu
 
       # Source of the application manifests
       source:
