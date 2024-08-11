@@ -24,7 +24,8 @@ spec:
         repoURL: https://github.com/debianmaster/argocd-demo.git
         targetRevision: HEAD
         path: '{{.path.path}}'
-      
+        helm:
+          releaseName: {{index .path.segments 1}}
       # Destination cluster and namespace to deploy the application
       destination:
         server: https://kubernetes.default.svc
