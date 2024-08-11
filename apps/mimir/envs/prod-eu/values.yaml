@@ -5,3 +5,5 @@ wordpress:
       password: bar
     rootUser:
       password: baz
+  service:
+    type: ClusterIP
