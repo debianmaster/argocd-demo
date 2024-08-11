@@ -11,9 +11,7 @@ spec:
       repoURL: https://github.com/debianmaster/argocd-demo.git
       revision: HEAD
       directories:
-      - path: apps/*/envs/prod-eu      
-      values:
-        cluster: '{{.branch}}-{{.path.basename}}'
+      - path: apps/*/envs/prod-eu
   template:      
     metadata:
       name: '{{index .path.segments 1}}-{{index .path.segments 3}}' 
